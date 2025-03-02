@@ -1,8 +1,11 @@
 import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
+print(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append("..")
 
-from relevancy.LLMConfig import LLMConfig
-from relevancy.PDFSummarizer import PDFSummarizer
+from LLMConfig import LLMConfig
+from PDFSummarizer import PDFSummarizer
 
 def main():
     if len(sys.argv) != 2:
@@ -10,6 +13,7 @@ def main():
         sys.exit(1)
 
     config = LLMConfig()
+    print(f"{config}")
     summarizer = PDFSummarizer(config)
     
     # Extract and summarize PDF
