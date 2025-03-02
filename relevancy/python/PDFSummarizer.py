@@ -1,4 +1,4 @@
-from relevancy.LLMConfig import LLMConfig
+from LLMConfig import LLMConfig
 
 
 import PyPDF2
@@ -29,6 +29,7 @@ Example usage:
 class PDFSummarizer:
     def __init__(self, config: LLMConfig):
         self.config = config
+        print(f'using {config.api_key} at {config.base_url}')
         self.client = OpenAI(
             api_key=config.api_key,
             base_url=config.base_url
@@ -153,6 +154,7 @@ class PDFSummarizer:
             )
             return response.choices[0].message.content
         except Exception as e:
+            print(f'model: {self.config.model}')
             return f"Error getting LLM response: {str(e)}"
 
     def save_conversation(self, output_path: str = None, term: str = None) -> str:
