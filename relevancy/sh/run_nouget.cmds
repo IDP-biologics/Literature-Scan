@@ -1,0 +1,9 @@
+#CUDA_VISIBLE_DEVICES=0 python /rbscratch/brettin/DepMap-Experiments/tool_collection/pull_papers//nougat_pdf.py ./chunks/2/ &
+#CUDA_VISIBLE_DEVICES=1 python /rbscratch/brettin/DepMap-Experiments/tool_collection/pull_papers//nougat_pdf.py ./chunks/3/ &
+#CUDA_VISIBLE_DEVICES=2 python /rbscratch/brettin/DepMap-Experiments/tool_collection/pull_papers//nougat_pdf.py ./chunks/4/ &
+#CUDA_VISIBLE_DEVICES=3 python /rbscratch/brettin/DepMap-Experiments/tool_collection/pull_papers//nougat_pdf.py ./chunks/5/ &
+#CUDA_VISIBLE_DEVICES=4 python /rbscratch/brettin/DepMap-Experiments/tool_collection/pull_papers//nougat_pdf.py ./chunks/6/ &
+#CUDA_VISIBLE_DEVICES=5 python /rbscratch/brettin/DepMap-Experiments/tool_collection/pull_papers//nougat_pdf.py ./chunks/7/ &
+
+CUDA_VISIBLE_DEVICES=0 python /rbscratch/brettin/DepMap-Experiments/tool_collection/pull_papers//nougat_pdf.py ./chunks/8/ &
+CUDA_VISIBLE_DEVICES=1 python /rbscratch/brettin/DepMap-Experiments/tool_collection/pull_papers//nougat_pdf.py ./chunks/9/ &
