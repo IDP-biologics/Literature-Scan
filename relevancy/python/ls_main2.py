@@ -85,7 +85,7 @@ def process_relevancy_check(pmid, question, delete_if_no=False):
     logger.info(f'Answer: {answer}')
     
     is_relevant = not answer.lower().startswith('no')
-    if not is_relevant and delete_if_no:
+    if (not is_relevant) and delete_if_no:
         logger.info(f'removing {pmid}.pdf')
         os.remove(f'{pmid}.pdf')
     
@@ -140,7 +140,7 @@ def process_partner_relevancy(pmid: str, term: str, matching_partner: str, templ
         question3 = f"What, if any, physical interactions occur between {term} and {matching_partner}"
         score += process_relevancy_check(pmid, question3)
 
-    if score != 3 and not no_delete:
+    if score != 3 and (not no_delete):
         if os.path.exists(f'{pmid}.pdf'):
             logger.info(f'removing {pmid}.pdf')
             os.remove(f'{pmid}.pdf')
