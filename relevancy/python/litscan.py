@@ -13,7 +13,7 @@ import tiktoken
 # Or to get the parent directory (if modules are one level up)
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from relevancy.LLMConfig import LLMConfig
+from LLMConfig import LLMConfig
 config = LLMConfig()
 
 # NCBI Entrez base URL
