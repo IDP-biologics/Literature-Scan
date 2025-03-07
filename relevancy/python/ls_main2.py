@@ -30,13 +30,6 @@ parser.add_argument("--logfile", type=str,
                    help="Path to the log file (default: %(default)s)")
 
 
-class Config:
-    """Configuration settings for the literature scanning application."""
-
-    # Partner interaction settings
-    PARTNER_LIMIT = 50
-    PARTNER_SCORE_THRESHOLD = 0.925
-
 
 # Parse arguments
 args     = parser.parse_args()
@@ -94,13 +87,13 @@ def process_relevancy_check(pmid, question, delete_if_no=False):
 def get_relevant_partners(term: str) -> List[str]:
     """Get relevant interaction partners for a given term above a score threshold."""
     partners = []
-    partner_data = get_string_interaction_partners(term, limit=Config.PARTNER_LIMIT)
+    partner_data = get_string_interaction_partners(term, limit=LitScanConfig.PARTNER_LIMIT)
     
     for i, item in enumerate(partner_data):
         partner = item["preferredName_B"]
         logger.info(f'{i}\t{item["preferredName_A"]}\t{item["preferredName_B"]}\t{item["score"]}')
         
-        if item["score"] > Config.PARTNER_SCORE_THRESHOLD:
+        if item["score"] > LitScanConfig.PARTNER_SCORE_THRESHOLD:
             partners.append(partner)
     
     return partners
