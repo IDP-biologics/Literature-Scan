@@ -3,6 +3,7 @@ from litscan import get_pmcids
 from litscan import get_pmcids_for_term_and_partner
 from litscan import get_pdf
 from litscan import is_pdf_relevant
+from oa import get_pdf as get_pdf_oa
 
 import os
 from time import sleep
@@ -240,7 +241,7 @@ def main():
             continue
         else:
             for pmid in pmids:
-                get_pdf(pmid)
+                get_pdf_oa(pmid)
 
 
         # Part 3: Determine the relevancy of the PDFs
