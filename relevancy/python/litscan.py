@@ -14,7 +14,7 @@ import tiktoken
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from LLMConfig import LLMConfig
-config = LLMConfig()
+from LitScanConfig import LitScanConfig
 
 # NCBI Entrez base URL
 # BASE_URL = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
@@ -37,17 +37,6 @@ if __name__ == "__main__":
 else:
     logger = logging.getLogger('ls_main2.litscan')
 
-class LitScanConfig:
-    """Configuration class to manage API endpoints and settings"""
-    retmax = 40 
-    openai_api_key = "EMPTY"
-    openai_base_url = "http://lambda13.cels.anl.gov:9999/v1"
-    openai_model = "llama31-405b-fp8"
-
-    def __init__(self):
-        logger.warn("Warning: LitScanConfig initialized")
-        raise Exception("LitScanConfig initialized")
-        
 
 def get_pmcids(term, retmax=LitScanConfig.retmax):
     """
@@ -271,6 +260,7 @@ def is_pdf_relevant(pdf_filename, question):
     logger.info(f'extracting text from {pdf_filename}')
     content = extract_pdf_text(pdf_filename)
     if not content:
+        logger.info(f"content from extract_pdf_text {pdf_filename} is None")
         return None
     
     # Split content into chunks
@@ -340,15 +330,15 @@ def ask_llm_about_relevance(content, question):
         - Uses temperature=0.0 for more consistent, deterministic responses
         - Configured to use the LLM settings from LitScanConfig
     """
-    logger.info(f'establishing client on base_url: {LitScanConfig.openai_base_url}')
+    logger.info(f'establishing client on base_url: {LLMConfig.base_url}')
     client = OpenAI(
-        api_key=LitScanConfig.openai_api_key,
-        base_url=LitScanConfig.openai_base_url
+        api_key=LLMConfig.api_key,
+        base_url=LLMConfig.base_url
     )
 
     logger.info(f'requesting chat.completion')
     chat_response = client.chat.completions.create(
-        model=LitScanConfig.openai_model,
+        model=LLMConfig.model,
         messages=[
             {"role": "user", "content": f"Given the following content from a scientific paper, \
             is it relevant to answering the question: '{question}'? \
